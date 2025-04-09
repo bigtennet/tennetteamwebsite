@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennet Team | All Things Tech, Powered by Innovation</title>
+    <meta name="description" content="Your ultimate partner for everything tech. We specialize in AI Solutions, Web Development, Ethical Hacking, Branding & Design, and more.">
+    
+    <!-- Tailwind CSS - Using the smaller core build -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    
+    <!-- Google Fonts - Preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e6f1fe',
+                            100: '#cce3fd',
+                            200: '#99c7fb',
+                            300: '#66abf9',
+                            400: '#338ff7',
+                            500: '#0073f5',
+                            600: '#005cc4',
+                            700: '#004593',
+                            800: '#002e62',
+                            900: '#001731',
+                        },
+                        secondary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        /* Custom Styles - Simplified for better performance */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark .glass {
+            background: rgba(17, 25, 40, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        
+        .card-shadow:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(45deg, #0073f5, #38bdf8);
+        }
+        
+        .dark .gradient-text {
+            background-image: linear-gradient(45deg, #38bdf8, #7dd3fc);
+        }
+        
+        /* Simplified transitions for better performance */
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Hide scrollbar for IE, Edge and Firefox */
+        html {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Lazy load images */
+        .lazy-image {
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+        
+        .lazy-image.loaded {
+            opacity: 1;
+        }
+        
+        /* Simplified animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+        
+        .animate-delay-100 { animation-delay: 0.1s; }
+        .animate-delay-200 { animation-delay: 0.2s; }
+        .animate-delay-300 { animation-delay: 0.3s; }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <!-- Dark mode setup -->
+    <script>
+        // Check for dark mode preference
+        if (localStorage.getItem('darkMode') === 'true' || 
+            (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        
+        // Initialize intersection observer for lazy loading
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('.lazy-image');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(img) {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // Fallback for browsers without intersection observer
+                lazyImages.forEach(function(img) {
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                });
+            }
+        });
+    </script>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Copy%20of%20Brand_icon-removebg-preview-3JX7JmAv69hjIvI2RuYvvVFWGcieVC.png" alt="Tennet Team Logo" class="w-10 h-10 rounded-md">
+                    <span class="font-bold text-xl gradient-text">Tennet Team</span>
+                </div>
+                
+                <nav class="hidden md:flex gap-6">
+                    <a href="#services" class="text-sm font-medium hover:text-primary-500 transition-all">Services</a>
+                    <a href="#projects" class="text-sm font-medium hover:text-primary-500 transition-all">Projects</a>
+                    <a href="#team" class="text-sm font-medium hover:text-primary-500 transition-all">Team</a>
+                    <a href="#about" class="text-sm font-medium hover:text-primary-500 transition-all">About</a>
+                    <a href="#contact" class="text-sm font-medium hover:text-primary-500 transition-all">Contact</a>
+                </nav>
+                
+                <div class="flex items-center gap-4">
+                    <!-- Dark mode toggle -->
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-300 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                    
+                    <!-- Contact button -->
+                    <a href="#contact" class="hidden md:inline-flex items-center justify-center rounded-md bg-primary-500 px-4 py-2 text-sm font-medium text-white hover:bg-primary-600 transition-all">
+                        Get in Touch
+                    </a>
+                    
+                    <!-- Mobile menu button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="hidden md:hidden py-4 space-y-2">
+                <a href="#services" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition-all">Services</a>
+                <a href="#projects" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition-all">Projects</a>
+                <a href="#team" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition-all">Team</a>
+                <a href="#about" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition-all">About</a>
+                <a href="#contact" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition-all">Contact</a>
+                <a href="#contact" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md bg-primary-500 text-white hover:bg-primary-600 transition-all">Get in Touch</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden relative">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="flex flex-col items-center gap-8 text-center">
+                    <div class="animate-fade-in">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Copy%20of%20Brand_icon-removebg-preview-3JX7JmAv69hjIvI2RuYvvVFWGcieVC.png" alt="Tennet Team Logo" class="w-32 h-32 rounded-lg shadow-lg">
+                    </div>
+                    
+                    <div class="space-y-4 animate-fade-in animate-delay-100">
+                        <h1 class="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl gradient-text">
+                            All Things Tech, <br class="hidden sm:block"> Powered by Innovation
+                        </h1>
+                        <p class="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 text-lg md:text-xl">
+                            Your ultimate partner for everything tech. We bring ideas to life with cutting-edge solutions.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 animate-fade-in animate-delay-200">
+                        <a href="#services" class="inline-flex items-center justify-center rounded-md bg-primary-500 px-6 py-3 text-base font-medium text-white hover:bg-primary-600 transition-all shadow-lg hover:shadow-xl">
+                            Explore Our Services 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#contact" class="inline-flex items-center justify-center rounded-md bg-white dark:bg-gray-800 px-6 py-3 text-base font-medium text-primary-500 hover:text-primary-600 border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all shadow-lg hover:shadow-xl">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 md:py-24 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl gradient-text">Our Services</h2>
+                    <p class="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 md:text-lg">
+                        We specialize in a wide range of tech solutions to help your business thrive.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Service Cards -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 card-shadow">
+                        <div class="text-4xl mb-4">🧠</div>
+                        <h3 class="text-xl font-bold mb-2">AI Solutions</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Custom AI solutions to automate and enhance your business processes.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 card-shadow">
+                        <div class="text-4xl mb-4">💻</div>
+                        <h3 class="text-xl font-bold mb-2">Web Development</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Responsive, modern websites and web applications built with the latest technologies.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 card-shadow">
+                        <div class="text-4xl mb-4">🛡️</div>
+                        <h3 class="text-xl font-bold mb-2">Ethical Hacking</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Security assessments and penetration testing to protect your digital assets.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 card-shadow">
+                        <div class="text-4xl mb-4">🎨</div>
+                        <h3 class="text-xl font-bold mb-2">Branding & Design</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Creative design solutions that communicate your brand's unique identity.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 card-shadow">
+                        <div class="text-4xl mb-4">⚙️</div>
+                        <h3 class="text-xl font-bold mb-2">Automation</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Streamline your workflows and increase efficiency with custom automation.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 card-shadow">
+                        <div class="text-4xl mb-4">🧩</div>
+                        <h3 class="text-xl font-bold mb-2">Software Development</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Tailored software solutions designed to meet your specific business needs.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 card-shadow">
+                        <div class="text-4xl mb-4">🚀</div>
+                        <h3 class="text-xl font-bold mb-2">Tech Solutions</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Comprehensive tech consulting and implementation for all your requirements.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 card-shadow">
+                        <div class="text-4xl mb-4">💬</div>
+                        <h3 class="text-xl font-bold mb-2">Social Media Management</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Strategic social media presence to boost your brand's online visibility.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-16 md:py-24 bg-gray-100 dark:bg-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl gradient-text">Our Projects</h2>
+                    <p class="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 md:text-lg">
+                        Take a look at some of our recent work and successful implementations.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Cards - Using data-src for lazy loading -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-video relative">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x400/0073f5/FFFFFF/png?text=AI+Analytics+Dashboard" alt="AI-Powered Analytics Dashboard">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">AI-Powered Analytics Dashboard</h3>
+                            <p class="text-gray-600 dark:text-gray-300">A comprehensive analytics platform with AI-driven insights for a fintech company.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-video relative">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x400/0073f5/FFFFFF/png?text=E-commerce+Redesign" alt="E-commerce Website Redesign">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">E-commerce Website Redesign</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Complete overhaul and modernization of an e-commerce platform with enhanced UX.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-video relative">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x400/0073f5/FFFFFF/png?text=Workflow+Automation" alt="Automated Workflow System">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Automated Workflow System</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Custom automation solution that increased operational efficiency by 40%.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-video relative">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x400/0073f5/FFFFFF/png?text=Security+Assessment" alt="Cybersecurity Assessment">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Cybersecurity Assessment</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Comprehensive security audit and implementation of enhanced protection measures.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-video relative">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x400/0073f5/FFFFFF/png?text=Mobile+App" alt="Mobile App Development">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Mobile App Development</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Cross-platform mobile application with real-time data synchronization.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-video relative">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x400/0073f5/FFFFFF/png?text=Brand+Identity" alt="Brand Identity Redesign">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Brand Identity Redesign</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Complete visual identity refresh including logo, color scheme, and marketing materials.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="py-16 md:py-24 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl gradient-text">Our Team</h2>
+                    <p class="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 md:text-lg">
+                        Meet the brilliant minds behind Tennet Team's innovation and success.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Founder -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-square relative overflow-hidden">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x600/0073f5/FFFFFF/png?text=Founder" alt="Founder">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold mb-1">Alex Morgan</h3>
+                            <p class="text-primary-500 font-medium mb-3">Founder & CEO</p>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Visionary tech leader with 15+ years of experience in AI and software development.</p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.5 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Co-Founder 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-square relative overflow-hidden">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x600/0073f5/FFFFFF/png?text=Co-Founder" alt="Co-Founder">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold mb-1">Jamie Chen</h3>
+                            <p class="text-primary-500 font-medium mb-3">Co-Founder & CTO</p>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Tech innovator specializing in cybersecurity and ethical hacking with a passion for secure systems.</p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Co-Founder 2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden card-shadow">
+                        <div class="aspect-square relative overflow-hidden">
+                            <img class="lazy-image w-full h-full object-cover" data-src="https://placehold.co/600x600/0073f5/FFFFFF/png?text=Co-Founder" alt="Co-Founder">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold mb-1">Taylor Reed</h3>
+                            <p class="text-primary-500 font-medium mb-3">Co-Founder & Creative Director</p>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Award-winning designer with expertise in UX/UI and brand identity development.</p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 md:py-24 bg-gray-100 dark:bg-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid gap-12 lg:grid-cols-2 items-center">
+                    <div class="space-y-6">
+                        <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl gradient-text">About Tennet Team</h2>
+                        <p class="text-gray-600 dark:text-gray-300 text-lg">
+                            Whether you're building a startup, upgrading your business, or automating your world — 
+                            we've got the tools, the team, and the tech to make it happen.
+                        </p>
+                        <div class="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+                            <div class="h-1 w-12 bg-primary-500"></div>
+                            <p class="text-xl font-medium italic">
+                                "One vision, One Team, Infinite Impacts."
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-3 text-gray-600 dark:text-gray-300">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="font-medium">Reach:</span> Global | Confidential | Efficient
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                <span class="font-medium">Mission:</span> To transform businesses through innovative technology solutions
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                <span class="font-medium">Vision:</span> A world where technology empowers every business to reach its full potential
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 flex items-center justify-center card-shadow">
+                        <div class="text-center space-y-6">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Copy%20of%20Brand_icon-removebg-preview-3JX7JmAv69hjIvI2RuYvvVFWGcieVC.png" alt="Tennet Team Logo" class="w-32 h-32 mx-auto">
+                            <div class="space-y-2">
+                                <div class="text-4xl font-bold tracking-tighter gradient-text">
+                                    Tennet Team
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Transforming ideas into innovative tech solutions since 2020
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl gradient-text">Get in Touch</h2>
+                    <p class="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 md:text-lg">
+                        Ready to transform your tech vision into reality? Contact us today.
+                    </p>
+                </div>
+                
+                <div class="mx-auto max-w-lg space-y-8">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 card-shadow">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Email</p>
+                                    <a href="mailto:tennetteam0@gmail.com" class="text-lg font-medium hover:text-primary-500 transition-all">
+                                        tennetteam0@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Instagram</p>
+                                    <a href="https://instagram.com/tennetteam0" target="_blank" rel="noopener noreferrer" class="text-lg font-medium hover:text-primary-500 transition-all">
+                                        @tennetteam0
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-500" fill="currentColor" viewBox="0 0 448 512">
+                                        <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">TikTok</p>
+                                    <a href="https://tiktok.com/@tennetteam0" target="_blank" rel="noopener noreferrer" class="text-lg font-medium hover:text-primary-500 transition-all">
+                                        @tennetteam0
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <p class="text-gray-600 dark:text-gray-300 text-center">
+                                Follow us on social media for the latest updates and tech insights.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <a href="mailto:tennetteam0@gmail.com" class="inline-flex items-center justify-center rounded-md bg-primary-500 px-6 py-3 text-base font-medium text-white hover:bg-primary-600 transition-all shadow-lg hover:shadow-xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Send us an Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Copy%20of%20Brand_icon-removebg-preview-3JX7JmAv69hjIvI2RuYvvVFWGcieVC.png" alt="Tennet Team Logo" class="w-8 h-8 rounded-sm">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                        © <span id="current-year"></span> Tennet Team. All rights reserved.
+                    </p>
+                </div>
+                
+                <div class="flex items-center gap-6">
+                    <a href="https://instagram.com/tennetteam0" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        <span class="sr-only">Instagram </span>
+                    </a>
+                    <a href="https://tiktok.com/@tennetteam0" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 448 512">
+                            <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/>
+                        </svg>
+                        <span class="sr-only">TikTok</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
